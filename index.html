@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Calculateur TVA - Service Express</title></head>
+<body style="background:#020617; color:#fff; font-family:sans-serif; text-align:center; padding:50px;">
+  <a href="https://service-express.org" style="color:#94a3b8; text-decoration:none;">← Retour au portail</a>
+  <h1>📊 Calculateur <span>TVA</span></h1>
+  <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:20px; max-width:400px; margin:20px auto;">
+    <label>Montant (€)</label><br><input type="number" id="a" value="100" oninput="c()"><br><br>
+    <div id="r" style="font-size:24px; color:#a78bfa;">TVA (20%) : 20.00 €</div>
+  </div>
+  <script>function c(){ let a=document.getElementById('a').value; document.getElementById('r').textContent='TVA (20%) : '+(a*0.2).toFixed(2)+' €'; }</script>
+</body></html>
