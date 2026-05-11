@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><title>Calculateur TVA - Service Express</title></head>
-<body style="background:#020617; color:#fff; font-family:sans-serif; text-align:center; padding:50px;">
-  <a href="https://service-express.org" style="color:#94a3b8; text-decoration:none;">← Retour au portail</a>
-  <h1>📊 Calculateur <span>TVA</span></h1>
-  <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:20px; max-width:400px; margin:20px auto;">
-    <label>Montant (€)</label><br><input type="number" id="a" value="100" oninput="c()"><br><br>
-    <div id="r" style="font-size:24px; color:#a78bfa;">TVA (20%) : 20.00 €</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculateur TVA 2026 : HT ou TTC - Service Express</title>
+  <style>
+    :root { --bg: #020617; --surface: rgba(255,255,255,0.05); --border: rgba(255,255,255,0.1); --purple: #a78bfa; --accent: #7c3aed; --text: #e2e8f0; --muted: #94a3b8; --green: #34d399; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 0 16px 60px; text-align: center; }
+    header { padding: 30px 0; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    .nav-top { max-width: 500px; margin: 0 auto 20px; text-align: left; }
+    .nav-top a { color: var(--muted); font-size: 13px; text-decoration: none; }
+    h1 { font-size: 28px; color: var(--purple); }
+    .ad-placeholder { background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; margin: 20px auto; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.7rem; text-transform: uppercase; min-height: 90px; max-width: 500px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; max-width: 500px; margin: 0 auto; text-align: left; }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; margin-top: 15px; }
+    input, select { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; color: #fff; font-size: 16px; outline: none; }
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+    .res-card { background: rgba(167,139,250,0.05); border: 1px solid var(--purple); padding: 15px; border-radius: 15px; text-align: center; }
+    .res-val { font-size: 22px; font-weight: 800; color: var(--purple); margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-top"><a href="https://service-express.org">← Retour au portail</a></div>
+    <h1>📊 Calculateur <span>TVA</span></h1>
+  </header>
+  <div class="ad-placeholder">Publicité AdSense</div>
+  <div class="card">
+    <label>Montant (€)</label>
+    <input type="number" id="amt" value="100" oninput="calc()">
+    <label>Taux de TVA</label>
+    <select id="rate" onchange="calc()">
+      <option value="0.2">Normale (20%)</option>
+      <option value="0.1">Intermédiaire (10%)</option>
+      <option value="0.055">Réduit (5.5%)</option>
+      <option value="0.021">Particulier (2.1%)</option>
+    </select>
+    <div class="res-grid">
+      <div class="res-card"><label>Montant TVA</label><div class="res-val" id="r_tva">20.00 €</div></div>
+      <div class="res-card"><label>Total TTC</label><div class="res-val" id="r_total">120.00 €</div></div>
+    </div>
   </div>
-  <script>function c(){ let a=document.getElementById('a').value; document.getElementById('r').textContent='TVA (20%) : '+(a*0.2).toFixed(2)+' €'; }</script>
-</body></html>
+  <script>
+    function calc() {
+      let a = parseFloat(document.getElementById('amt').value) || 0;
+      let r = parseFloat(document.getElementById('rate').value);
+      let tva = a * r;
+      let total = a + tva;
+      document.getElementById('r_tva').textContent = tva.toFixed(2) + " €";
+      document.getElementById('r_total').textContent = total.toFixed(2) + " €";
+    }
+  </script>
+</body>
+</html>
